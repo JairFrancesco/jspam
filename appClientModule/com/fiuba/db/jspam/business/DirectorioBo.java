@@ -12,5 +12,12 @@ import com.fiuba.db.jspam.exception.DirectorioInvalidoException;
  */
 public interface DirectorioBo {
 
+	/**
+	 * Busca en un cierto directorio mails, preclasificados, en formato xml.
+	 * @param pathDirectorio directorio donde estan los archivos xml
+	 * @return una coleccion de mails clasificados
+	 * @throws DirectorioInvalidoException si el directorio es invalido.
+	 * @throws ArchivoXmlMailInvalido si alguno de los archivos xml esta mal formado.
+	 */
     Collection<MailClasificado> buscarMailsClasificados(String pathDirectorio) throws DirectorioInvalidoException, ArchivoXmlMailInvalido;
 }
