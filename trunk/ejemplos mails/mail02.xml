@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<mail>
+	<asunto>prueba 2</asunto>
+	<body>este es el contenido del mail</body>
+	<spam>false</spam>
+</mail>

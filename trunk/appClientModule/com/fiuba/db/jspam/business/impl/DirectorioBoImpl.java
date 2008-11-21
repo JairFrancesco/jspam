@@ -29,7 +29,6 @@ public class DirectorioBoImpl implements DirectorioBo {
     /**
      * {@inheritDoc}
      */
-    @Override
     public Collection<MailClasificado> buscarMailsClasificados(String pathDirectorio) throws DirectorioInvalidoException, ArchivoXmlMailInvalido {
         Collection<MailClasificado> mails = new ArrayList<MailClasificado>();
         // si no es un directorio retornar error
