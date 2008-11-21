@@ -1,5 +1,6 @@
 package com.fiuba.db.jspam.business.impl;
 
+import java.math.BigDecimal;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -8,12 +9,13 @@ import java.util.Map.Entry;
 import com.fiuba.db.jspam.business.SpamFilterBo;
 import com.fiuba.db.jspam.entidad.MailClasificado;
 import com.fiuba.db.jspam.entidad.Word;
+import com.fiuba.db.jspam.exception.IdExistenteException;
 
 /**
  * @author Demian
  *
  */
-public class NaiveBayesBoImpl implements SpamFilterBo {
+public class NaiveBayesBoImpl implements SpamFilterBo {	
 
 	/* (non-Javadoc)
 	 * @see com.fiuba.db.jspam.business.SpamFilterBo#aprender(java.util.Collection)
@@ -69,8 +71,26 @@ public class NaiveBayesBoImpl implements SpamFilterBo {
 		for (Entry<String, Integer> entry: palabrasEnSpam.entrySet()) {
 			Word word = new Word();
 			word.setId(entry.getKey());
-			word.setProbabilidadSpam(new Double(entry.getValue().intValue() / totalMailsSpam));
+			word.setProbabilidadSpam(new BigDecimal(entry.getValue().intValue()).divide(new BigDecimal(totalMailsSpam)));
+			word.setProbabilidadNoSpam(new BigDecimal("0"));
+			try {
+				word.save();
+			} catch (IdExistenteException e) {
+				word.update();
+			}
 		}
-	}
-
+		
+		//lo mismo pero para cada palabra que se encontro en un mail que no es de spam
+		for (Entry<String, Integer> entry: palabrasEnNoSpam.entrySet()){
+			Word word = new Word();
+			word.setId(entry.getKey());
+			word.setProbabilidadNoSpam(new BigDecimal(entry.getValue().intValue()).divide(new BigDecimal(totalMailsNoSpam)));
+			word.setProbabilidadSpam(new BigDecimal("0"));
+			try {
+				word.save();
+			} catch (IdExistenteException e) {
+				word.update();
+			}
+		}
+	}	
 }
