@@ -12,7 +12,7 @@ import com.fiuba.db.jspam.persistence.jdbc.SpamFilterDaoJdbcImpl;
  *
  */
 public class Word {
-	public static final String[] STOP_WORDS = {"el", "la", "de", "lo", "a", "del", "las", "los", "les", "le", "y", "te"};	
+	public static final String[] STOP_WORDS = {"el", "la", "de", "lo", "a", "del", "las", "los", "les", "le", "y", "te", " ", ""};	
 	private String id;
 	private BigDecimal probabilidadSpam;
 	private BigDecimal probabilidadNoSpam;
