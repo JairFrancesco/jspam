@@ -9,19 +9,14 @@ import java.util.Collection;
  *
  */
 public class Mail {
-    private String asunto;
-    private String body;
+    private String asunto = "";
+    private String body = "";
 
     public Collection<String> getNonStopWords(){
     	Collection<String> words = new ArrayList<String>();
     	
-    	if (asunto != null){
-    		words.addAll(Arrays.asList(asunto.split("\\s")));
-    	}
-    	
-    	if (body != null){
-    		words.addAll(Arrays.asList(body.split("\\s")));
-    	}
+    	words.addAll(Arrays.asList(asunto.replaceAll("\\W", " ").split("\\s+")));
+    	words.addAll(Arrays.asList(body.replaceAll("\\W", " ").split("\\s+")));
     	
     	for (String stopWord : Word.STOP_WORDS) {
 			words.remove(stopWord);
