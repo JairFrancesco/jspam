@@ -1,0 +1,8 @@
+<mail>
+  <probabilidadSpam>0.608</probabilidadSpam>
+  <probabilidadNoSpam>0.000</probabilidadNoSpam>
+  <spam>true</spam>
+  <asunto>are you ready?</asunto>
+  <body>viagra sexo juan</body>
+  <archivo>C:\workspace\jspam\ejemplos mails\clasificar\test1Spam.xml</archivo>
+</mail>
