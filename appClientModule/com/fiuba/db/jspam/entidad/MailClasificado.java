@@ -1,26 +1,25 @@
 package com.fiuba.db.jspam.entidad;
 
+import java.math.BigDecimal;
+
 /**
- * @author PNT
+ * @author Demian
  *
  */
-public class MailClasificado extends Mail {
-
-    private boolean spam;
-
-    /**
-     * @return the spam.
-     */
-    public boolean isSpam() {
-        return spam;
-    }
-
-    /**
-     * @param spam
-     *            the spam to set.
-     */
-    public void setSpam(boolean spam) {
-        this.spam = spam;
-    }
-    
+public class MailClasificado extends MailPreClasificado{
+	private BigDecimal probabilidadSpam;
+	private BigDecimal probabilidadNoSpam;
+	
+	public BigDecimal getProbabilidadSpam() {
+		return probabilidadSpam;
+	}
+	public void setProbabilidadSpam(BigDecimal probabilidadSpam) {
+		this.probabilidadSpam = probabilidadSpam;
+	}
+	public BigDecimal getProbabilidadNoSpam() {
+		return probabilidadNoSpam;
+	}
+	public void setProbabilidadNoSpam(BigDecimal probabilidadNoSpam) {
+		this.probabilidadNoSpam = probabilidadNoSpam;
+	}	
 }

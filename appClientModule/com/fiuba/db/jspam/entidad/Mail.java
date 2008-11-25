@@ -11,6 +11,7 @@ import java.util.Collection;
 public class Mail {
     private String asunto = "";
     private String body = "";
+    private String archivo;
 
     public Collection<String> getNonStopWords(){
     	Collection<String> words = new ArrayList<String>();
@@ -54,6 +55,14 @@ public class Mail {
     public void setBody(String body) {
         this.body = body;
     }
+
+	public String getArchivo() {
+		return archivo;
+	}
+
+	public void setArchivo(String archivo) {
+		this.archivo = archivo;
+	}
     
     
 }
