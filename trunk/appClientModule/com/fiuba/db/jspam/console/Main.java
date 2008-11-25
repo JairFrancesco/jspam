@@ -1,19 +1,24 @@
 package com.fiuba.db.jspam.console;
 
+import java.io.IOException;
 import java.util.Collection;
 
 import com.fiuba.db.jspam.business.DirectorioBo;
 import com.fiuba.db.jspam.business.SpamFilterBo;
 import com.fiuba.db.jspam.business.impl.DirectorioBoImpl;
 import com.fiuba.db.jspam.business.impl.NaiveBayesBoImpl;
+import com.fiuba.db.jspam.entidad.Mail;
 import com.fiuba.db.jspam.entidad.MailClasificado;
+import com.fiuba.db.jspam.entidad.MailPreClasificado;
 import com.fiuba.db.jspam.enums.Operacion;
 import com.fiuba.db.jspam.exception.ArchivoXmlMailInvalido;
 import com.fiuba.db.jspam.exception.DirectorioInvalidoException;
 import com.fiuba.db.jspam.exception.ParametrosInvalidosException;
+import com.fiuba.db.jspam.exception.SinEntrenarException;
 
 public class Main {
     public static final String PARAMETRO_APRENDER = "-ad";
+    public static final String PARAMETRO_CLASIFICAR_DIR = "-cd";
 
     public static void main(String[] args) {
         Main main = new Main();
@@ -22,6 +27,8 @@ public class Main {
             System.out.println("Operacion: " + operacion);
             if (operacion.equals(Operacion.APRENDER)) {
                 main.aprender(args[1]);
+            } else if (operacion.equals(Operacion.CLASIFICAR)) {
+            	main.clasificar(args[1]);
             }
         } catch (ParametrosInvalidosException e) {
             System.out.println(main.getAyudaParametros());
@@ -29,10 +36,39 @@ public class Main {
             System.out.println("El directorio ingresado es invalido");
         } catch (ArchivoXmlMailInvalido e) {
             System.out.println("Alguno de los archivos de mail esta mal formado. Revisar el log para mas detalles");
+        } catch (SinEntrenarException e){
+        	System.out.println("Para poder clasificar, primero debe realizar la operacion de aprender. Comando -ad directorio");
+        } catch (IOException e){
+        	System.out.println("Error al querer mover los mails clasificados como spam");
         }
 	}
     
     /**
+     * A partir de un directorio en donde hay mails en formato xml, los clasifica
+     * en mails spam y no spam.
+     * @param directorioPath directorio que contiene los mails en formato xml.
+     * @throws IOException si hubo un error al mover los mails de spam
+     */
+    public void clasificar(String directorioPath) throws SinEntrenarException, DirectorioInvalidoException, ArchivoXmlMailInvalido, IOException {
+    	SpamFilterBo spamFilterBo = new NaiveBayesBoImpl();
+    	DirectorioBo directorioBo = new DirectorioBoImpl();
+    	
+    	if (!spamFilterBo.isEntrenado()){
+    		throw new SinEntrenarException();
+    	}		
+    	    	
+    	Collection<Mail> mails = directorioBo.buscarMails(directorioPath);
+    	if (mails.size() > 0){
+    		Collection<MailClasificado> mailsClasificados = spamFilterBo.clasificar(mails);    	
+	    	
+    		//mover a spam	    	
+	    	String pathArchivo = mailsClasificados.iterator().next().getArchivo();
+	    	String directorioSpam = pathArchivo.substring(0, pathArchivo.lastIndexOf("\\")) + "/spam"; 
+	    	directorioBo.moverSpamACarpeta(mailsClasificados, directorioSpam);
+    	}
+	}
+
+	/**
      * A partir de un directorio en donde hay mails en formato xml, ya preclasificados,
      * obtiene probabilidades de cada palabra y las guarda. Estas probabilidades son la base
      * para poder determinar luego si un mail es spam o no.
@@ -44,7 +80,7 @@ public class Main {
         DirectorioBo directorioBo = new DirectorioBoImpl();
         SpamFilterBo spamFilterBo = new NaiveBayesBoImpl();
         
-        Collection<MailClasificado> mailsClasificados = directorioBo.buscarMailsClasificados(directorioPath);
+        Collection<MailPreClasificado> mailsClasificados = directorioBo.buscarMailsPreClasificados(directorioPath);
         spamFilterBo.aprender(mailsClasificados);
     }
     
@@ -53,7 +89,9 @@ public class Main {
      * @return un string con la ayuda para correr el programa
      */
     public String getAyudaParametros() {
-        return "Posibles parametros: \n" + "Para que aprenda: -ad directorio \n";
+        return "Posibles parametros: \n" + 
+        	   "Para que aprenda: -ad directorio \n" +
+        	   "Para que clasifique directorios: -cd directorio \n";
     }
 
     /**
@@ -68,9 +106,12 @@ public class Main {
             throw new ParametrosInvalidosException();
         }
 
-        // java -jar jspam.jar -ad "d:\temp\mails"
+        // java -jar jspam.jar -ad "d:\temp\mailsClasificados"
         if ((args[0].equals(PARAMETRO_APRENDER)) && (args.length == 2)) {
             return Operacion.APRENDER;
+        // java -jar jspam.jar -dd "d:\temp\bandejaEntrada"
+        } else if ((args[0].equals(PARAMETRO_CLASIFICAR_DIR)) && (args.length == 2)){
+        	return Operacion.CLASIFICAR;
         } else {
             throw new ParametrosInvalidosException();
         }
