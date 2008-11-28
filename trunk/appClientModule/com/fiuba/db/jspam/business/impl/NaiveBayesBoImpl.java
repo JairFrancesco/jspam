@@ -16,7 +16,6 @@ import com.fiuba.db.jspam.entidad.Mail;
 import com.fiuba.db.jspam.entidad.MailClasificado;
 import com.fiuba.db.jspam.entidad.MailPreClasificado;
 import com.fiuba.db.jspam.entidad.Word;
-import com.fiuba.db.jspam.exception.IdExistenteException;
 import com.fiuba.db.jspam.exception.SinEntrenarException;
 
 /**
@@ -82,30 +81,32 @@ public class NaiveBayesBoImpl implements SpamFilterBo {
 	private void registrarProbabilidades(HashMap<String, Integer> palabrasEnSpam, HashMap<String, Integer> palabrasEnNoSpam, 
 			int totalMailsSpam, int totalMailsNoSpam){
 		//recorro cada palabra que se encontro en un mail de spam
+        HashMap<String, Word> allWords = new HashMap<String, Word>();	    
 		for (Entry<String, Integer> entry: palabrasEnSpam.entrySet()) {
 			Word word = new Word();
 			word.setId(entry.getKey());
 			word.setProbabilidadSpam(new BigDecimal(entry.getValue().intValue()).divide(new BigDecimal(totalMailsSpam), 3, BigDecimal.ROUND_DOWN));
 			word.setProbabilidadNoSpam(new BigDecimal("0"));
-			try {
-				word.save();
-			} catch (IdExistenteException e) {
-				word.update();
-			}
+			allWords.put(word.getId(), word);
 		}
 		
 		//lo mismo pero para cada palabra que se encontro en un mail que no es de spam
 		for (Entry<String, Integer> entry: palabrasEnNoSpam.entrySet()){
-			Word word = new Word();
-			word.setId(entry.getKey());
-			word.setProbabilidadNoSpam(new BigDecimal(entry.getValue().intValue()).divide(new BigDecimal(totalMailsNoSpam), 3, BigDecimal.ROUND_DOWN));
-			word.setProbabilidadSpam(new BigDecimal("0"));
-			try {
-				word.save();
-			} catch (IdExistenteException e) {
-				word.update();
-			}
+		    Word word = new Word();
+            // busco si ya existe con la probabilidad de spam
+            if (allWords.containsKey(entry.getKey())) {
+                word.setProbabilidadSpam(allWords.get(entry.getKey()).getProbabilidadSpam());
+            } else {                
+                word.setProbabilidadSpam(new BigDecimal("0"));
+            }
+
+            word.setId(entry.getKey());
+            word
+                .setProbabilidadNoSpam(new BigDecimal(entry.getValue().intValue()).divide(new BigDecimal(totalMailsNoSpam), 3, BigDecimal.ROUND_DOWN));
+            allWords.put(word.getId(), word);
 		}
+		
+		Word.saveAll(allWords.values());
 		
 		//estadisticas
 		Estadistica estadistica = new Estadistica();
