@@ -1,6 +1,7 @@
 package com.fiuba.db.jspam.entidad;
 
 import java.math.BigDecimal;
+import java.util.Collection;
 
 import com.fiuba.db.jspam.exception.IdExistenteException;
 import com.fiuba.db.jspam.persistence.jdbc.SpamFilterDaoJdbcImpl;
@@ -25,17 +26,42 @@ public class Word {
 	}
 	
 	/**
+     * Guarda una coleccion de palabras.
+     * 
+     * @param words
+     */
+    public static void saveAll(Collection<Word> words) {
+        new SpamFilterDaoJdbcImpl().saveAll(words);
+    }
+	
+	/**
 	 * actualiza la entidad.
 	 */
 	public void update(){
 		new SpamFilterDaoJdbcImpl().update(this);
 	}
-	
-	/**
-	 * busca la palabra por su id
-	 * @param wordInMail
-	 * @return
-	 */
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean equals(Object obj) {
+        if ((obj != null) && (obj instanceof Word)) {
+            Word word = (Word) obj;
+            if (word.getId().equals(this.id)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * busca la palabra por su id
+     * 
+     * @param wordInMail
+     * @return
+     */
 	public static Word find(String id) {		
 		return new SpamFilterDaoJdbcImpl().findWord(id);
 	}

@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Collection;
 
 import com.fiuba.db.jspam.entidad.Estadistica;
 import com.fiuba.db.jspam.entidad.Word;
@@ -166,4 +167,34 @@ public class SpamFilterDaoJdbcImpl implements SpamFilterDao {
             factory.closeConnection(conn);
         }
 	}
+
+    /**
+     * 
+     * {@inheritDoc}
+     */
+    public void saveAll(Collection<Word> words) {
+        Connection conn = null;
+        ConnectionFactory factory = ConnectionFactory.getInstance();
+        PreparedStatement stmInsert = null;
+        try {
+            conn = factory.getConnection();
+            // off autocommit
+            conn.setAutoCommit(false);
+            stmInsert = conn.prepareStatement("insert into WORD(word, probabilidadSpam, probabilidadNoSpam) " + "VALUES (?, ?, ?)");
+            for (Word word : words) {
+                stmInsert.setString(1, word.getId());
+                stmInsert.setBigDecimal(2, word.getProbabilidadSpam());
+                stmInsert.setBigDecimal(3, word.getProbabilidadNoSpam());
+                stmInsert.addBatch();
+            }
+
+            stmInsert.executeBatch();
+            conn.commit();
+        } catch (SQLException ex) {
+            throw new RuntimeException("Error al guardar toda una coleccion de palabras", ex);
+        } finally {
+            factory.closeStatement(stmInsert);
+            factory.closeConnection(conn);
+        }
+    }
 }
