@@ -46,6 +46,7 @@ public class NaiveBayesBoImpl implements SpamFilterBo {
 			HashSet<String> wordProcessed = new HashSet<String>();
 			//por cada palabra del mail
 			for (String word : mailClasificado.getNonStopWords()) {
+			    word = word.toLowerCase();
 				//se procesa un sola vez una palabra dentro de un mail
 				if (!wordProcessed.contains(word)){
 					wordProcessed.add(word);
