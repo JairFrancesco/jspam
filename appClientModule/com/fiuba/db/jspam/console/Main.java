@@ -60,11 +60,14 @@ public class Main {
     	Collection<Mail> mails = directorioBo.buscarMails(directorioPath);
     	if (mails.size() > 0){
     		Collection<MailClasificado> mailsClasificados = spamFilterBo.clasificar(mails);    	
-	    	
-    		//mover a spam	    	
+	    	    			    	
 	    	String pathArchivo = mailsClasificados.iterator().next().getArchivo();
+	    	//mover a spam
 	    	String directorioSpam = pathArchivo.substring(0, pathArchivo.lastIndexOf("\\")) + "/spam"; 
 	    	directorioBo.moverSpamACarpeta(mailsClasificados, directorioSpam);
+	    	//mover no spam
+	    	String directorioNoSpam = pathArchivo.substring(0, pathArchivo.lastIndexOf("\\")) + "/nospam";
+	    	directorioBo.moverNoSpamACarpeta(mailsClasificados, directorioNoSpam);
     	}
 	}
 
@@ -91,7 +94,7 @@ public class Main {
     public String getAyudaParametros() {
         return "Posibles parametros: \n" + 
         	   "Para que aprenda: -ad directorio \n" +
-        	   "Para que clasifique directorios: -cd directorio \n";
+        	   "Para que clasifique mails: -cd directorio \n";
     }
 
     /**
@@ -109,7 +112,7 @@ public class Main {
         // java -jar jspam.jar -ad "d:\temp\mailsClasificados"
         if ((args[0].equals(PARAMETRO_APRENDER)) && (args.length == 2)) {
             return Operacion.APRENDER;
-        // java -jar jspam.jar -dd "d:\temp\bandejaEntrada"
+        // java -jar jspam.jar -cd "d:\temp\bandejaEntrada"
         } else if ((args[0].equals(PARAMETRO_CLASIFICAR_DIR)) && (args.length == 2)){
         	return Operacion.CLASIFICAR;
         } else {
