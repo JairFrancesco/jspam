@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<mail>
+	<asunto>Búsqueda Laboral</asunto>
+	<body>Envío una búsqueda Laboral:
+ 
+Estamos Buscando un Estudiante en la carrera de Sistemas o Informática  con conocimientos en:
+Herramientas Office (Acces Power Point Excell etc...)
+Soporte Técnico de PC, Instalación de programas, Asistencia a A usuarios
+Horas de Trabajo :  full time
+Se ofrece de 1500 pesos en adelante de acuerdo a experiencias.
+ 
+A los Interesados enviar c.v a
+ 
+vgomariz@ucmisalud.gov.ar
+ 
+con referencias  Soprte Técnico</body>
+	<spam>true</spam>
+</mail>
