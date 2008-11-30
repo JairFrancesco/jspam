@@ -3,7 +3,6 @@ package com.fiuba.db.jspam.entidad;
 import java.math.BigDecimal;
 import java.util.Collection;
 
-import com.fiuba.db.jspam.exception.IdExistenteException;
 import com.fiuba.db.jspam.persistence.jdbc.SpamFilterDaoJdbcImpl;
 
 /**
@@ -18,14 +17,6 @@ public class Word {
 	private BigDecimal probabilidadNoSpam;	
 	
 	/**
-	 * guarda a la entidad.
-	 * @throws IdExistenteException si la entidad ya existe
-	 */
-	public void save() throws IdExistenteException {
-		new SpamFilterDaoJdbcImpl().save(this);		
-	}
-	
-	/**
      * Guarda una coleccion de palabras.
      * 
      * @param words
@@ -33,14 +24,14 @@ public class Word {
     public static void saveAll(Collection<Word> words) {
         new SpamFilterDaoJdbcImpl().saveAll(words);
     }
-	
-	/**
-	 * actualiza la entidad.
-	 */
-	public void update(){
-		new SpamFilterDaoJdbcImpl().update(this);
+    
+    /**
+     * borra los registros de todas las palabras.
+     */
+    public static void deleteAll() {
+    	new SpamFilterDaoJdbcImpl().deleteAllWords();
 	}
-
+	
     /**
      * {@inheritDoc}
      */
@@ -87,5 +78,7 @@ public class Word {
 
 	public void setProbabilidadNoSpam(BigDecimal probabilidadNoSpam) {
 		this.probabilidadNoSpam = probabilidadNoSpam;
-	}	
+	}
+
+		
 }

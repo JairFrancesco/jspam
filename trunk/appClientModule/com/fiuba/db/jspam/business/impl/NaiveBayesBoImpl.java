@@ -78,8 +78,18 @@ public class NaiveBayesBoImpl implements SpamFilterBo {
 		registrarProbabilidades(palabrasEnSpam, palabrasEnNoSpam, totalMailsSpam, totalMailsNoSpam);
 	}
 	
+	/**
+	 * Registra las probabilidades de cada una de las palabras encontradas en los mails preclasificados.
+	 * @param palabrasEnSpam map con las palabras encontradas en un mail spam y la cantidad de veces que fueron encontradas
+	 * @param palabrasEnNoSpam map con las palabras encontradas en un mail NO spam y la cantidad de veces que fueron encontradas
+	 * @param totalMailsSpam cantidad total de mails spam
+	 * @param totalMailsNoSpam cantidad total de mails NO spam
+	 */
 	private void registrarProbabilidades(HashMap<String, Integer> palabrasEnSpam, HashMap<String, Integer> palabrasEnNoSpam, 
 			int totalMailsSpam, int totalMailsNoSpam){
+		//borrar registros previos
+		Word.deleteAll();
+		Estadistica.deleteAll();
 		//recorro cada palabra que se encontro en un mail de spam
         HashMap<String, Word> allWords = new HashMap<String, Word>();	    
 		for (Entry<String, Integer> entry: palabrasEnSpam.entrySet()) {
