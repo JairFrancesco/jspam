@@ -40,4 +40,12 @@ public interface DirectorioBo {
 	 * @throws IOException si el directorio es invalido.
 	 */
 	void moverSpamACarpeta(Collection<MailClasificado> mails, String pathDirectorio) throws IOException;
+
+	/**
+	 * Mueve los mails de la coleccion, a un directorio.
+	 * @param mails los mails a mover
+	 * @param pathDirectorio el directorio al cual moverlos.
+	 * @throws IOException si el directorio es invalido.
+	 */
+	void moverNoSpamACarpeta(Collection<MailClasificado> mailsClasificados, String directorioNoSpam) throws IOException;
 }

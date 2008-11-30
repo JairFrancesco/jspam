@@ -71,33 +71,49 @@ public class DirectorioBoImpl implements DirectorioBo {
 
         return mails;
     }
+    
+    public void moverNoSpamACarpeta(Collection<MailClasificado> mails, String directorioNoSpam) throws IOException {    
+		File directorio = new File(directorioNoSpam);				
+		if (!directorio.exists()){
+			directorio.mkdirs();
+		}
+		
+		for (MailClasificado mailClasificado : mails) {
+			if (!mailClasificado.isSpam()){
+				moverMail(mailClasificado, directorioNoSpam);
+			}
+		}    	
+    }
+    
+    private void moverMail(MailClasificado mailClasificado, String pathDirectorio) throws IOException{
+    	XStream xStream = new XStream();
+    	xStream.alias("mail", MailClasificado.class);
+		String xml = xStream.toXML(mailClasificado);			
+		String nombreArchivo = mailClasificado.getArchivo().substring(mailClasificado.getArchivo().lastIndexOf("\\")+1);
+		FileOutputStream file = new FileOutputStream(pathDirectorio+"/"+nombreArchivo);
+		try{
+			file.write(xml.getBytes());
+		} finally {
+			file.close();
+		}
+		
+		File mailOriginal = new File(mailClasificado.getArchivo());
+		mailOriginal.delete();
+    }
 
     /**
      * 
      * {@inheritDoc}
      */
 	public void moverSpamACarpeta(Collection<MailClasificado> mails, String pathDirectorio) throws IOException {
-		XStream xStream = new XStream();
-		File directorio = new File(pathDirectorio);
-				
+		File directorio = new File(pathDirectorio);				
 		if (!directorio.exists()){
 			directorio.mkdirs();
 		}
 		
 		for (MailClasificado mailClasificado : mails) {
 			if (mailClasificado.isSpam()){
-				xStream.alias("mail", MailClasificado.class);
-				String xml = xStream.toXML(mailClasificado);			
-				String nombreArchivo = mailClasificado.getArchivo().substring(mailClasificado.getArchivo().lastIndexOf("\\")+1);
-				FileOutputStream file = new FileOutputStream(pathDirectorio+"/"+nombreArchivo);
-				try{
-					file.write(xml.getBytes());
-				} finally {
-					file.close();
-				}
-				
-				File mailOriginal = new File(mailClasificado.getArchivo());
-				mailOriginal.delete();
+				moverMail(mailClasificado, pathDirectorio);
 			}
 		}		
 	}    
