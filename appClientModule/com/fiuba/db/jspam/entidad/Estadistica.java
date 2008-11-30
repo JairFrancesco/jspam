@@ -18,6 +18,13 @@ public class Estadistica {
 	}
 	
 	/**
+	 * borra todos los registros de estadisticas.
+	 */
+	public static void deleteAll() {
+		new SpamFilterDaoJdbcImpl().deleteAllEstadisticas();
+	}
+	
+	/**
 	 * busca la ultima estadistica. 
 	 * @return
 	 */
@@ -36,5 +43,5 @@ public class Estadistica {
 	}
 	public void setTotalMailsNoSpam(int totalMailsNoSpam) {
 		this.totalMailsNoSpam = totalMailsNoSpam;
-	}			
+	}				
 }
