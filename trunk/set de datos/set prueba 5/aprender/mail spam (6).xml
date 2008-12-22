@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<mail>
+	<asunto>RE: grabador de incidencias</asunto>
+	<body>Ok. Por ahora que tengo en mente, falta el wsdl del web service de la gente de ADI.
+
+ 
+
+El WS que te pase esta completo. Su función es encolar un mensaje para que nosotros luego lo consumamos y eso ya lo hace. 
+
+ 
+
+Ahora estamos en el desarrollo de consumir el mensaje. Seria muy bueno que la gente del IVR empiece a invocar el WS, porque de seguro va a haber mas de un problema con algún código o algo relacionado.
+
+ 
+
+Saludos!
+
+ 
+
+
+--------------------------------------------------------------------------------
+
+De: Creixell, Diego 
+Enviado el: Martes, 25 de Noviembre de 2008 01:01 p.m.
+Para: Berjman, Demián
+CC: Turdo, Fernando
+Asunto: RE: grabador de incidencias
+
+ 
+
+Demian, depues te pido que me pases que te estaria debiendo para la prox. semana asi voy avanzando.
+
+ 
+
+Por otro lado, el WS que ya publicamos, estaria en ppio completo? o falta hacer mas cosas ahi?
+
+ 
+
+ 
+
+Slds.
+
+ 
+
+
+--------------------------------------------------------------------------------
+
+De: Berjman, Demián 
+Enviado el: Miércoles, 19 de Noviembre de 2008 09:57 a.m.
+Para: Creixell, Diego
+CC: Turdo, Fernando
+Asunto: RE: grabador de incidencias
+
+Tenemos 2 temas:
+
+ 
+
+1)       Manejo del Weblogic. El maneja prioridades entre 0 y 9. Eso lo podemos dejar a gusto del que envía el mensaje de que fije la prioridad. 
+
+ 
+
+2)       Manejo nuestro. Necesitamos saber que valores son prioridad alta y cuales baja, para determinar en que casos llamar a ADI.
+
+ 
+
+Así que si queres lo dejamos como pusiste:
+
+ 
+
+Entre 0 y 4 à solo genero sobre comercial o remedy
+
+Entre 5 y 9 à genero ADI + comercial o remedy
+
+ 
+
+Te parece?
+
+ 
+
+Lo que me gustaría es contar en un principio con una prioridad por default. Que pasa si se tara el IVR y me manda 15 o cualquier cosa distinta a 0-9? Esto seria hasta que tengamos una forma de devolver un error ante una situación de este tipo (estamos investigando)
+
+ 
+
+ 
+
+
+--------------------------------------------------------------------------------
+
+De: Creixell, Diego 
+Enviado el: Miércoles, 19 de Noviembre de 2008 09:46 a.m.
+Para: Berjman, Demián
+CC: Turdo, Fernando
+Asunto: RE: grabador de incidencias
+
+ 
+
+Esto lo resolverá automáticamente el WL, no?
+
+Imagino por ejemplo nuestra logica:
+
+            Entre 0 y 4 à solo genero sobre comercial o remedy
+
+            Entre 5 y 9 à genero ADI + comercial o remedy
+
+ 
+
+Luego, el IVR podrá optar por jugar dentro del rango para tener un manejo un poco mas fino de las prioridades. Como lo ves?
+
+ 
+
+Complica mucho, o preferis valores estaticos?
+
+Si optamos por valores estatico (0 y 9), que pasa si se tara el IVR y envia un 2 por ejemplo?
+
+ 
+
+Slds.
+
+	</body>
+	<spam>true</spam>
+</mail>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<mail>
+	<asunto>RE: grabador de incidencias</asunto>
+	<body>Como va.
+
+ 
+
+Les quería pedir si me pueden definir como va a ser el contenido y formato del campo “segmento” del mensaje que uds me van a enviar. Lo habíamos hablado pero falta cerrarlo. Creo que si es de Movics viene grupo-nivel y si es de siscel la calidad y algo mas. También con que separador viene, ya que necesito parsearlo para enviárselo a la gente de ADI.
+
+ 
+
+Les voy a pedir también que en cuanto puedan, hagan algunas invocaciones contra el web service, así vamos detectando problemas. Si bien todavía no cerramos algún circuito, con que uds se puedan comunicar y encolar algún mensaje, logramos un avance.
+
+ 
+
+Saludos!
+
+	</body>
+	<spam>false</spam>
+</mail>

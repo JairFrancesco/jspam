@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<mail>
+	<asunto>RE: grabador de incidencias</asunto>
+	<body>Con respecto a pto 1, 
+
+Sistema Comercial: SISCEL / MOVICS (lo definimos nosotros) ¿es case sencitive?
+
+Prioridad: aca nos conviene usar lo que sea nativo de las colas, por ejemplo
+
+            0: Alta
+
+            5: baja
+
+ 
+
+O similar. La idea que nosotros desde la capa de integración hagamos lo menos posible.
+
+ 
+
+Confirmame.
+
+Slds.
+
+
+	</body>
+	<spam>false</spam>
+</mail>

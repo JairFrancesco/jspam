@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<mail>
+	<asunto>formulario remedy</asunto>
+	<body>Sebastian, que tal.
+
+ 
+
+Me paso tu mail Pablo Rivero. Yo estuve trabajando con el en el proyecto de post venta.
+
+ 
+
+Estoy en un nuevo proyecto: “sistema de grabación de mensajes”. Desde el IVR un cliente deja un trámite y nosotros generamos una incidencia en Siscel o un ticket en Remedy. 
+
+ 
+
+Para el caso de Remedy voy a necesitar  que me crees un formulario nuevo en el ambiente de desarrollo. El mismo tendría que tener los siguientes campos (son todos string, incluyendo la fecha):
+
+ 
+
+código de la incidencia – longitud 15 
+numero de móvil – longitud 10 
+comentario – longitud 300 
+fecha creación incidencia – longitud 14 
+indicador de prioridad – longitud 1 
+usuario – longitud 8 
+ 
+
+Cualquier cosa llámame, mi interno es 6501 (estoy en central park)
+
+ 
+
+Gracias!!
+
+ 
+
+           Demián
+
+
+	</body>
+	<spam>false</spam>
+</mail>

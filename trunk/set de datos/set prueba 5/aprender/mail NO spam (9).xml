@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<mail>
+	<asunto>RE: Tareas sobre ADI</asunto>
+	<body>Te mando el orden en que fuimos trabajando:
+
+ 
+
+Web Service Interfaz (supongo que este es el que invoca el IVR) 
+Priorizacion de mensajes (para encolar) 
+Cola de recepcion (aca es donde encola el WS los pedidos del IVR) 
+Pck generador de incidencias (siscel) 
+Circuito errores 
+Generador mensaje hacia ADI 
+Ticket en Remedy 
+ 
+
+No se bien a que te referís con “Impactador WS ADI” y “Generador mensaje hacia ADI”. Supuse este último como la llamada al WS que nos brinda ADI.
+
+ 
+
+Ahora estamos en el punto 4.
+
+ 
+
+Saludos!
+
+ 
+
+
+	</body>
+	<spam>false</spam>
+</mail>

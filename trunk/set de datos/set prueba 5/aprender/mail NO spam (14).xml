@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<mail>
+	<asunto>Scripts de creacion GDI_ERRORES_INCIDENCIAS</asunto>
+	<body>Les mando en attach los scripts.
+
+El script de creación de la tabla tiene el _date al final porque es la version con el tipo de campo DATE para la fecha.
+
+Supuestamente vamos a utilizar el tipo de dato TIMESTAMP, pero el cliente de Oracle que Nico tiene instalado en su maquina es muy viejo y no lo contempla.
+
+Hasta que no le cambien la version de cliente Oracle, creamos la tabla con el tipo de dato DATE para poder siguir avanzando.
+
+Saludos.
+
+ 
+
+Carolina B. Barbiero
+
+Central Park
+
+5321-6493
+
+	</body>
+	<spam>false</spam>
+</mail>

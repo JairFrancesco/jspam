@@ -16,8 +16,8 @@ public class Mail {
     public Collection<String> getNonStopWords(){
     	Collection<String> words = new ArrayList<String>();
     	
-    	words.addAll(Arrays.asList(asunto.replaceAll("\\W", " ").split("\\s+")));
-    	words.addAll(Arrays.asList(body.replaceAll("\\W", " ").split("\\s+")));
+    	words.addAll(Arrays.asList(asunto.replaceAll("[^a-zA-Z]", " ").split("\\s+")));
+        words.addAll(Arrays.asList(body.replaceAll("[^a-zA-Z]", " ").split("\\s+")));
     	
     	for (String stopWord : Word.STOP_WORDS) {
 			words.remove(stopWord);
