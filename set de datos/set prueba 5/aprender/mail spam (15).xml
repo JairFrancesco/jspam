@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<mail>
+	<asunto>RE: grabador de incidencias</asunto>
+	<body>Hola Demián:
+
+ 
+
+El campo segmento lo podemos definir en términos de propuesta, pero sería la gente de ADI quién nos debiera decir si son los datos que están requiriendo. Nuestra propuesta sería:
+
+ 
+
+-          Clientes Siscel (S o SD): Se enviarían el Producto (BUA_SISCEL_PRODUCTO), la Calidad (BUA_SISCEL_CALIDAD) y la Categoria (BUA_SISCEL_CATEGORIA) separados por punto y coma:
+
+ 
+
+Ej:  “PO;PP;D”
+
+ 
+
+-          Clientes Movics (M o MD): Se enviarían el Producto (BUA_MOVICS_PRODUCTO) y el Nivel (BUA_MOVICS_NIVEL) separados por punto y coma:
+
+ 
+
+Ej:  “CM_MIX;IC”
+
+ 
+
+-          Clientes No Identificados en BUA (XX): Proponemos que este campo vaya vacio, siempre que sea factible.
+
+ 
+
+ 
+
+Como es necesario validar esta definición antes de adoptarla como final, copio a Lucas y a Javier para que intervengan en esta validación.
+
+ 
+
+Hoy en día el acceso a la maqueta se encuentra con algunas limitaciones. No obstante ya te comentarremos cuando podamos hacer algunas pruebas manuales a sus servicios.
+
+ 
+
+Saludos
+
+Carlos
+
+ 
+
+	</body>
+	<spam>true</spam>
+</mail>
