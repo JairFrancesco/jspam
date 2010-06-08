@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+    <package name="gbondi" namespace="/gbondi" extends="struts-default">
+
+        <action name="PreConfigurarColectivo" class="com.fiuba.gbondi.web.controller.ConfiguracionColectivo">
+            <result>/gbondi/configurarModeloColectivo.jsp</result>
+        </action>
+
+        <action name="ConfigurarColectivo" class="com.fiuba.gbondi.web.controller.ConfiguracionColectivo" method="modificarModelo">
+            <result>/gbondi/configurarModeloColectivo.jsp</result>
+        </action>
+
+        <action name="PreSetup" class="com.fiuba.gbondi.web.controller.Setup" method="inicializar">
+            <result>/gbondi/setup.jsp</result>
+        </action>
+
+        <action name="Setup" class="com.fiuba.gbondi.web.controller.Setup" method="modificarConfiguracion">
+            <result>/gbondi/setup.jsp</result>
+        </action>
+
+        <action name="PreConfigurarPasajeros" class="com.fiuba.gbondi.web.controller.ConfiguracionPasajeros">
+            <result>/gbondi/configurarModeloPasajeros.jsp</result>
+        </action>
+
+        <action name="ConfigurarPasajeros" class="com.fiuba.gbondi.web.controller.ConfiguracionPasajeros" method="modificarModelo">
+            <result>/gbondi/configurarModeloPasajeros.jsp</result>
+        </action>
+        
+    </package>
+</struts>
+

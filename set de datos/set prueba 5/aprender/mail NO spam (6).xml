@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="ISO-8859-1" ?>
-<mail>
-	<asunto>RE: web service</asunto>
-	<body>Otra cosa que me falto mencionar para agregar en la documentación, es que quite de los parámetros del servicio el “Carácter de terminación” ya que no hace falta en este tipo de protocolos.
-	</body>
-	<spam>false</spam>
-</mail>
